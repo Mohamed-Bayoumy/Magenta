@@ -13,7 +13,7 @@ import Labs from './labs';
 <Labs label={"Reference lab :" }/>
 <br/>
 <InputField  type ={"search"}
-             styleClass={"col-sm-8"} 
+            styleClass={"col-sm-4"}
            label={"XRD Search :" }/>
 
 <InputField label={"XRD SID :"}/>
