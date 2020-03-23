@@ -10,7 +10,7 @@ import Labs from './labs';
      <form className="input-form">
 <InputField label={"Name :"}/>
 <InputField label={"Login :"}/>
-<Labs label={"Reference lab :" }/>
+<Labs label={"Reference lab s:" }/>
 <br/>
 <InputField  type ={"search"}
             styleClass={"col-sm-4"}
