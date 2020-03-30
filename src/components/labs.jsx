@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
+import { labsLocation } from "../data";
+const labs = props => {
+  return (
+    <React.Fragment>
+      <label className="col-sm-2">{props.label}</label>
+      <select required className="col-sm-2">
+        <option defaultValue="" className="disabled">
+          Select a lab
+        </option>
+        {labsLocation.map(item => (
+          <option key={item}> {item}</option>
+        ))}
+      </select>
+    </React.Fragment>
+  );
+};
 
-const labs =(props)=> {
-    const labs = ["Bejing Changping","Contract - IIlumina","Contract KBiosciences",
-    "Enkhuizen","Ghant","Gilroy","Landskrona","Novartis","Plant Analysis Group SBI","Santiago",
-   "Sarrians","Singapore","Slater","Stanton","Toulouse","Uberlandia"]
-   return (
-    <div className="row">
-    <label className="col-sm-2">{props.label}</label>
-       <select required className="col-sm-2">
-       <option value="" disabled selected>Choose a drink</option>
-           {labs.map((item)=><option key={item}> {item}</option>)}
-       </select>
-       </div>
-   )
-}
-
-export default labs
+export default labs;
