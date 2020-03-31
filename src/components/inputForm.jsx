@@ -1,5 +1,6 @@
 import React from "react";
 import InputField from "./inputField";
+import Search, { User } from "./search";
 import { Roles, labsLocation, CropGroups } from "../data";
 import Labs from "./labs";
 const inputForm = () => {
@@ -7,16 +8,11 @@ const inputForm = () => {
     <div className=" col-sm-12 col-md-8 col-lg-10  Form">
       <h3>User Input</h3>
       <form className="input-form">
-        <InputField label={"Name :"} />
-        <InputField label={"Login :"} />
-        <Labs label={"Reference lab:"} />
+        <InputField label={"Name :"} value={User.name} />
+        <InputField label={"Login :"} value={User.password} />
+        <Labs label={"Reference lab:"} value={User.lab} />
         <br />
-        <InputField
-          type={"search"}
-          styleClass={"col-sm-6"}
-          label={"XRD Search :"}
-        />
-
+        <Search />
         <InputField label={"XRD SID :"} />
         <InputField label={"XRD OID :"} />
         <InputField label={"XRD Code :"} />
@@ -25,24 +21,24 @@ const inputForm = () => {
       </form>
       <div className="formClass">
         <div className="formClassChild">
-        <form>
-          <p>Roles</p>
-          <select size={Roles.length} multiple>
-            {Roles.map(element => (
-              <option key={element}>{element}</option>
-            ))}
-          </select>
-        </form>
-        <div>
-          <select required className="autoScoring">
-            <option defaultValue="" className="disabled">
-              No AutoScoring roles
-            </option>
-            {Roles.map(item => (
-              <option key={item}> {item}</option>
-            ))}
-          </select>
-        </div>
+          <form>
+            <p>Roles</p>
+            <select size={Roles.length} multiple>
+              {Roles.map(element => (
+                <option key={element}>{element}</option>
+              ))}
+            </select>
+          </form>
+          <div>
+            <select required className="autoScoring">
+              <option defaultValue="" className="disabled">
+                No AutoScoring roles
+              </option>
+              {Roles.map(item => (
+                <option key={item}> {item}</option>
+              ))}
+            </select>
+          </div>
         </div>
         <form>
           <p>labs</p>
@@ -60,7 +56,6 @@ const inputForm = () => {
             ))}
           </select>
         </form>
-  
       </div>
     </div>
   );
