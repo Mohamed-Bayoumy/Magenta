@@ -9,6 +9,14 @@
 
 .Form {
   background-color: #dbe2cc;
+  padding-bottom: 5%;
+}
+.formClassChild
+{
+  float: left;
+  width: 50%;
+  margin-right: 40px;
+
 }
 
 .input-form>* {
@@ -60,6 +68,7 @@ option {
     text-align: center;
     color: gray;
     margin-bottom: 5px;
+    background-color: #dbe2cc;
   }
 
   form {
@@ -70,8 +79,6 @@ option {
 }
 
 .autoScoring {
+ margin-top: 20px;
   width: 400px;
-  position: absolute;
-  left: 15px;
-  bottom: 270px;
 }

@@ -24,6 +24,7 @@ const inputForm = () => {
         <InputField styleClass={"col-sm-4"} label={"e-mail :"} />
       </form>
       <div className="formClass">
+        <div className="formClassChild">
         <form>
           <p>Roles</p>
           <select size={Roles.length} multiple>
@@ -32,6 +33,17 @@ const inputForm = () => {
             ))}
           </select>
         </form>
+        <div>
+          <select required className="autoScoring">
+            <option defaultValue="" className="disabled">
+              No AutoScoring roles
+            </option>
+            {Roles.map(item => (
+              <option key={item}> {item}</option>
+            ))}
+          </select>
+        </div>
+        </div>
         <form>
           <p>labs</p>
           <select size={labsLocation.length} multiple>
@@ -48,16 +60,7 @@ const inputForm = () => {
             ))}
           </select>
         </form>
-        <div>
-          <select required className="autoScoring">
-            <option defaultValue="" className="disabled">
-              No AutoScoring roles
-            </option>
-            {Roles.map(item => (
-              <option key={item}> {item}</option>
-            ))}
-          </select>
-        </div>
+  
       </div>
     </div>
   );
