@@ -119,7 +119,8 @@ class inputForm extends Component {
             />
 
             <SelectionFields />
-            <button type="submit">Submit</button>
+            <button type="submit">Create</button>
+            <button>Back</button>
           </form>
         </div>
       </div>
