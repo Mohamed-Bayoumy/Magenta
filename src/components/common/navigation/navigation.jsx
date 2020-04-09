@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./navigation.scss";
 
 class navigation extends Component {
   constructor(props) {
@@ -7,35 +8,35 @@ class navigation extends Component {
       Navig: [
         {
           id: "1",
-          value: "Project"
+          value: "Project",
         },
         {
           id: "2",
-          value: "Experiment"
+          value: "Experiment",
         },
         {
           id: "3",
-          value: "Sample"
+          value: "Sample",
         },
         {
           id: "4",
-          value: "Assay"
+          value: "Assay",
         },
         {
           id: "5",
-          value: "Genetic map"
+          value: "Genetic map",
         },
         {
           id: "6",
-          value: "Result"
+          value: "Result",
         },
         {
           id: "7",
-          value: "Tools"
+          value: "Tools",
         },
         {
           id: "8",
-          value: "Statistics"
+          value: "Statistics",
         },
         {
           id: "9",
@@ -48,31 +49,31 @@ class navigation extends Component {
             "Experiment type",
             "Lab control",
             "Delete Assays",
-            "Re Validate Results"
+            "Re Validate Results",
           ],
-          show: true
+          show: true,
         },
         {
           id: "10",
-          value: "Monitoring"
-        }
-      ]
+          value: "Monitoring",
+        },
+      ],
     };
   }
-  toggleCollapse = item => {
-    this.setState(prevState => ({
-      Navig: prevState.Navig.map(element =>
+  toggleCollapse = (item) => {
+    this.setState((prevState) => ({
+      Navig: prevState.Navig.map((element) =>
         element.id === item
           ? { ...element, show: !prevState.Navig[item - 1].show }
           : element
-      )
+      ),
     }));
   };
 
   render() {
     return (
-      <ul className="col-sm-2 navigation-list">
-        {this.state.Navig.map(item => (
+      <ul className="col-md-4 col-lg-2  navigation-list">
+        {this.state.Navig.map((item) => (
           <li key={item.id}>
             <button
               className="navigation-item"
@@ -81,7 +82,7 @@ class navigation extends Component {
               data-toggle="collapse"
               aria-controls={item.value}
               href={"#" + item.value}
-              onClick={item => this.toggleCollapse(item.target.id)}
+              onClick={(item) => this.toggleCollapse(item.target.id)}
             >
               {item.value}
             </button>
@@ -92,9 +93,11 @@ class navigation extends Component {
                 className={item.show === true ? "collapse" : null}
               >
                 <ul className="subSection">
-                  {item.subSection.map(a => (
+                  {item.subSection.map((a) => (
                     <li key={a}>
-                      <button href="/">{a}</button>
+                      <button>
+                        <a href={"/" + a}>{a}</a>
+                      </button>
                       <br />
                     </li>
                   ))}

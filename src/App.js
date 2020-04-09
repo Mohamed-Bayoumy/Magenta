@@ -1,19 +1,24 @@
 import React from "react";
-import InputForm from "./components/inputForm";
-import Navig from "./components/navigation";
+import Navigation from "./components/common/navigation/navigation";
+import InputForm from "./components/inputForm/inputForm";
+import {
+  Route
+} from 'react-router-dom';
 
 function App() {
-  return ( <
-    div className = "container-fluid" >
+  return ( < div className = "container-fluid" >
     <
     div className = "row" >
     <
-    Navig / >
+    Navigation / >
     <
-    InputForm / >
-    <
-    /div> < /
-    div >
+    Route path = "/User"
+    component = {
+      InputForm
+    }
+    /> < /
+    div > <
+    /div>
   );
 }
 

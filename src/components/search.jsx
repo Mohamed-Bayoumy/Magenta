@@ -1,33 +1,33 @@
 import axios from "axios";
 import React, { Component } from "react";
-export const User = "";
+export let User = "";
 class search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idValue: ""
+      idValue: "",
     };
   }
 
-  componentDidUpdate() {
-    const magentaBackEndUrl = "";
-    axios
-      .post(magentaBackEndUrl, { data: this.state.idValue })
-      .then(res => {
-        axios
-          .get(magentaBackEndUrl, {})
-          .then(res => {
-            User = res.data;
-          })
-          .catch(error => {
-            console.log("There is no info belongs to this user");
-          });
-      })
-      .catch(error => {
-        console.log("couldn't post the your id");
-      });
-  }
-  handleChange = event => this.setState({ idValue: event.target.value });
+  // componentDidUpdate() {
+  //   const magentaBackEndUrl = "";
+  //   axios
+  //     .post(magentaBackEndUrl, { data: this.state.idValue })
+  //     .then((res) => {
+  //       axios
+  //         .get(magentaBackEndUrl, {})
+  //         .then((res) => {
+  //           User = res.data;
+  //         })
+  //         .catch((error) => {
+  //           console.log("There is no info belongs to this user");
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.log("couldn't post the your id");
+  //     });
+  // }
+  handleChange = (event) => this.setState({ idValue: event.target.value });
   render() {
     return (
       <div>
@@ -36,7 +36,7 @@ class search extends Component {
           type="search"
           className="col-sm-6"
           value={this.state.idValue}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
         />
       </div>
     );

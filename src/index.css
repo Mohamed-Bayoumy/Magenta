@@ -11,8 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-ul{list-style-type: none;float:left;width:400px;}
 
-ul li{float:left;width:150px;margin-top:10px;}
+ul {
+  list-style-type: none;
+  float: left;
+  width: 400px;
+}
 
-ul li.input{width:250px;}
+ul li {
+  float: left;
+  width: 150px;
+  margin-top: 10px;
+}
+
+ul li.input {
+  width: 250px;
+}

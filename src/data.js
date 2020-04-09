@@ -1,4 +1,5 @@
-export const Roles = [
+export const Data = {
+  Roles: [
     "ADMIN - Administrator of the whole application",
     "ASSAY COMPONENET CREATOR - Role to create assays components(primers,probes)",
     "ASSAY CREATOR - Role to create new assays",
@@ -12,9 +13,9 @@ export const Roles = [
     "REF DATA ADMIN - Role to administrate business reference data",
     "REFERENCE CONTRIBUTER - Responsible for maintaining of Reference maps",
     "REFERENCE PUBLISHER - Responsible for publication of Reference maps",
-    "SSP USER - Role For SSP USER To Upload Samples To Magenta"
-];
-export const CropGroups = [
+    "SSP USER - Role For SSP USER To Upload Samples To Magenta",
+  ],
+  CropGroups: [
     "B - Barley",
     "N - Beans",
     "O - Brassica oleracea",
@@ -43,9 +44,9 @@ export const CropGroups = [
     "T - Tomato",
     "V - Vegetables",
     "H - Watermelon",
-    "W - Wheat"
-];
-export const labsLocation = [
+    "W - Wheat",
+  ],
+  labsLocation: [
     "Bejing Changping",
     "Contract - IIlumina",
     "Contract KBiosciences",
@@ -61,5 +62,6 @@ export const labsLocation = [
     "Slater",
     "Stanton",
     "Toulouse",
-    "Uberlandia"
-];
+    "Uberlandia",
+  ],
+};
