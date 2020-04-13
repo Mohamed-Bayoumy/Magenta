@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./navigation.scss";
+import { Link } from "react-router-dom";
 
 class navigation extends Component {
   constructor(props) {
@@ -96,7 +97,7 @@ class navigation extends Component {
                   {item.subSection.map((a) => (
                     <li key={a}>
                       <button>
-                        <a href={"/" + a}>{a}</a>
+                        <Link to={"/" + a}>{a}</Link>
                       </button>
                       <br />
                     </li>

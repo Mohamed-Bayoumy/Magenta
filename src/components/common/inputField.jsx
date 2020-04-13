@@ -1,6 +1,6 @@
 import React from "react";
-
-const inputField = ({ name, label, value, onChange, inputClass }) => {
+import "../common/navigation/navigation.scss";
+const inputField = ({ name, label, value, onChange, inputClass, hasError }) => {
   return (
     <div className="form-group">
       <label htmlFor={name} className="col-sm-2">
@@ -13,6 +13,7 @@ const inputField = ({ name, label, value, onChange, inputClass }) => {
         value={value}
         onChange={onChange}
       />
+      {hasError.value ? null : <p className="errorClass">{hasError.message}</p>}
     </div>
   );
 };
