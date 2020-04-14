@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import InputField from "../common/inputField";
+import InputField from "../common/index";
 import Search from "../search";
 import { Data } from "./data";
 import SelectionFields from "./selectionFields";
