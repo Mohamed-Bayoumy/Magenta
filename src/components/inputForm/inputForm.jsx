@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import InputField from "../common/inputField";
-import Search, { formerUser } from "../search";
-import { Data } from "../../data.js";
+import Search from "../search";
+import { Data } from "./data";
 import SelectionFields from "./selectionFields";
 import "./inputForm.scss";
 import axios from "axios";
@@ -16,35 +16,39 @@ class inputForm extends Component {
       xrdCode: "",
       xrdContent: "",
       email: "",
+      roles: "",
+      noAutoScoringRoles: "",
+      labs: "",
+      cropGroups: "",
     },
     errors: {
       userName: {
         message: "User Name is required",
-        value: false,
+        value: true,
       },
       password: {
         message: "password is required",
-        value: false,
+        value: true,
       },
       xrdSid: {
         message: "Xrd Sid is required",
-        value: false,
+        value: true,
       },
       xrdOid: {
         message: "Xrd Oid is required",
-        value: false,
+        value: true,
       },
       xrdCode: {
         message: "Xrd Code is required",
-        value: false,
+        value: true,
       },
       xrdContent: {
         message: "Xrd Content is required",
-        value: false,
+        value: true,
       },
       email: {
         message: "Email isn't Valid",
-        value: false,
+        value: true,
       },
     },
     disableSubmit: false,
@@ -56,10 +60,16 @@ class inputForm extends Component {
   //   await axios.post(,this.state.account)
   // };
   async componentDidMount() {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    this.setState({ data: data });
+    try {
+      const { data } = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      this.setState({ data: data });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // try and catch
   }
   handleSearchChange = (event) => {
     this.setState({ idValue: event.target.value }, () => {
@@ -67,15 +77,25 @@ class inputForm extends Component {
       const formerUser = data.find(
         (element) => element.id.toString() === idValue
       );
-      console.log(formerUser);
       if (formerUser) {
-        account.userName = formerUser.name;
-        errors.userName.value = true;
-        account.email = formerUser.email;
-        errors.email.value = true;
-        this.setState({ account });
+        account.xrdSid = formerUser.id;
+        errors.xrdSid.value = true;
+        account.xrdOid = formerUser.phone;
+        errors.xrdOid.value = true;
+        account.xrdCode = formerUser.address.zipcode;
+        errors.xrdCode.value = true;
+        account.xrdContent = formerUser.company.bs;
+        errors.xrdContent.value = true;
+        this.setState({ account, errors });
       }
+      console.log(formerUser);
     });
+  };
+  handleSelectChange = (e) => {
+    const account = { ...this.state.account };
+    const index = e.target.name;
+    account[index] = e.target.value;
+    this.setState({ account });
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -85,8 +105,8 @@ class inputForm extends Component {
     const index = input.name;
     account[index] = input.value;
     if (index === "email") {
-      this.setState({ account });
       this.validateEmail(index);
+      this.setState({ account });
     } else if (account[index]) {
       errors[index].value = true;
     } else {
@@ -94,7 +114,7 @@ class inputForm extends Component {
     }
 
     for (let key in errors) {
-      if (errors[key].value === false) {
+      if (errors[key].value === false || !account[key]) {
         disableSubmit = false;
         break;
       } else {
@@ -104,10 +124,13 @@ class inputForm extends Component {
     this.setState({ account, errors, disableSubmit });
   };
   validateEmail(index) {
-    const errors = { ...this.state.errors };
-    if (/\S+@\S+\.\S+/.test(this.state.account.email)) {
-      errors[index].message = "this Email is valid";
+    const { account, errors } = { ...this.state };
+
+    if (/\S+@\S+\.\S+/.test(this.state.account.email) && account.email) {
       errors[index].value = true;
+    } else {
+      errors[index].message = "this Email isn't valid";
+      errors[index].value = false;
     }
     this.setState({ errors });
   }
@@ -190,7 +213,7 @@ class inputForm extends Component {
               hasError={errors.email}
             />
 
-            <SelectionFields />
+            <SelectionFields onChange={this.handleSelectChange} />
             <button
               type="submit"
               onClick={this.handleSubmit}
