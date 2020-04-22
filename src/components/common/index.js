@@ -1,27 +1,35 @@
 import React from "react";
 import "../common/navigation/navigation.scss";
 const inputField = ({
-    name,
-    label,
-    value,
-    onChange,
-    inputClass,
-    hasError
-  }) => {
-    return ( <
+  name,
+  label,
+  value,
+  onChange,
+  inputClass,
+  hasError
+}) => {
+  return ( <
       div className = "form-group" >
       <
       label htmlFor = {
         name
       }
       className = "col-sm-2" > {
+        " "
+      } {
         label
+      } {
+        " "
       } <
-      /label> <
-      input className = {
+      /label>{" "} <
+      input autoComplete = "new-password"
+      className = {
         inputClass ? inputClass : "col-sm-2"
       }
       id = {
+        name
+      }
+      type = {
         name
       }
       name = {
@@ -33,12 +41,17 @@ const inputField = ({
       onChange = {
         onChange
       }
-      /> {
-        hasError.value ? null : < p className = "errorClass" > {
-            hasError.message
-          } < /p>} <
-          /div>
-      );
-    };
+      />{" "} {
+      hasError.value ? null : ( <
+        p className = "errorClass" > {
+          hasError.message
+        } < /p>
+      )
+    } {
+      " "
+    } <
+    /div>
+);
+};
 
-    export default inputField;
+export default inputField;

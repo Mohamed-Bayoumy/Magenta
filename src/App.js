@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "./components/common/navigation/navigation";
-import InputForm from "./components/inputForm/inputForm";
+import InputForm from "./components/adminUser/inputForm/inputForm";
 import {
   Route,
   Switch
@@ -26,8 +26,8 @@ function App() {
       /
       >
       <
-      /Switch> <
-      /div > < /
+      /Switch> < /
+      div > < /
       div >
     );
   }

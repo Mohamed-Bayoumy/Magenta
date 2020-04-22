@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import InputField from "../common/index";
-import Search from "../search";
+import InputField from "../../common/index";
 import { Data } from "./data";
 import SelectionFields from "./selectionFields";
 import "./inputForm.scss";
 import axios from "axios";
+import Search from "../search/search";
 
 class inputForm extends Component {
   state = {
@@ -50,15 +50,34 @@ class inputForm extends Component {
         message: "Email isn't Valid",
         value: true,
       },
+      roles: {
+        message: "roles are require",
+        value: true,
+      },
+      noAutoScoringRoles: {
+        message: "No AutoScoring Roles are require",
+        value: true,
+      },
+      labs: {
+        message: "labs are require",
+        value: true,
+      },
+      cropGroups: {
+        message: "cropGroups are require",
+        value: true,
+      },
     },
     disableSubmit: false,
     data: "",
     idValue: "",
+    formerUser: [],
   };
 
-  // handleSubmit =async () => {
-  //   await axios.post(,this.state.account)
-  // };
+  handleSubmit = async (e) => {
+    //  await axios.post(,this.state.account)
+    e.preventDefault();
+    console.log("submitted");
+  };
   async componentDidMount() {
     try {
       const { data } = await axios.get(
@@ -72,30 +91,32 @@ class inputForm extends Component {
     // try and catch
   }
   handleSearchChange = (event) => {
-    this.setState({ idValue: event.target.value }, () => {
-      const { data, idValue, account, errors } = { ...this.state };
-      const formerUser = data.find(
-        (element) => element.id.toString() === idValue
-      );
-      if (formerUser) {
-        account.xrdSid = formerUser.id;
-        errors.xrdSid.value = true;
-        account.xrdOid = formerUser.phone;
-        errors.xrdOid.value = true;
-        account.xrdCode = formerUser.address.zipcode;
-        errors.xrdCode.value = true;
-        account.xrdContent = formerUser.company.bs;
-        errors.xrdContent.value = true;
-        this.setState({ account, errors });
-      }
-      console.log(formerUser);
-    });
+    const idValue = event.target.value;
+    const { data } = { ...this.state };
+    const formerUser = data.filter(
+      (element) => element.id.toString().includes(idValue) && idValue !== ""
+    );
+    this.setState({ idValue, formerUser });
+    console.log(formerUser);
   };
-  handleSelectChange = (e) => {
-    const account = { ...this.state.account };
-    const index = e.target.name;
-    account[index] = e.target.value;
-    this.setState({ account });
+
+  handleSearchResult = (e) => {
+    const { account, errors } = { ...this.state };
+    let { formerUser } = { ...this.state };
+    const index = formerUser.filter(
+      (element) => element.id.toString() === e.currentTarget.id
+    )[0];
+    account.xrdSid = index.id;
+    errors.xrdSid.value = true;
+    account.xrdOid = index.phone;
+    errors.xrdOid.value = true;
+    account.xrdCode = index.address.zipcode;
+    errors.xrdCode.value = true;
+    account.xrdContent = index.company.bs;
+    errors.xrdContent.value = true;
+    formerUser = [];
+
+    this.setState({ account, errors, formerUser });
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -106,7 +127,7 @@ class inputForm extends Component {
     account[index] = input.value;
     if (index === "email") {
       this.validateEmail(index);
-      this.setState({ account });
+      console.log(this.state.account.email);
     } else if (account[index]) {
       errors[index].value = true;
     } else {
@@ -125,14 +146,14 @@ class inputForm extends Component {
   };
   validateEmail(index) {
     const { account, errors } = { ...this.state };
-
-    if (/\S+@\S+\.\S+/.test(this.state.account.email) && account.email) {
+    const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (regexEmail.test(account.email)) {
       errors[index].value = true;
     } else {
       errors[index].message = "this Email isn't valid";
       errors[index].value = false;
     }
-    this.setState({ errors });
+    this.setState({ account, errors });
   }
 
   render() {
@@ -170,6 +191,8 @@ class inputForm extends Component {
             <Search
               onChange={this.handleSearchChange}
               value={this.state.idValue}
+              formerUser={this.state.formerUser}
+              searchResult={this.handleSearchResult}
             />
 
             <InputField
@@ -207,13 +230,14 @@ class inputForm extends Component {
             <InputField
               label={"e-mail :"}
               name="email"
+              type=""
               onChange={this.handleChange}
               value={account.email}
               inputClass={"col-sm-4"}
               hasError={errors.email}
             />
 
-            <SelectionFields onChange={this.handleSelectChange} />
+            <SelectionFields onChange={this.handleChange} />
             <button
               type="submit"
               onClick={this.handleSubmit}

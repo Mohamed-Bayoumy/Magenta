@@ -1,0 +1,32 @@
+.search {
+    float: left;
+    width: 100%;
+    display: flex;
+
+
+    .searchBox {
+        padding: 0;
+
+        &>* {
+            width: 100%;
+        }
+    }
+
+    .searchList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: white;
+
+
+        li {
+            padding-left: 10px;
+            width: 100%;
+
+            &:hover {
+                background-color: rgb(235, 235, 235);
+            }
+
+        }
+    }
+}
