@@ -94,7 +94,7 @@ class inputForm extends Component {
     const idValue = event.target.value;
     const { data } = { ...this.state };
     const formerUser = data.filter(
-      (element) => element.id.toString().includes(idValue) && idValue !== ""
+      (element) => element.name.toString().includes(idValue) && idValue !== ""
     );
     this.setState({ idValue, formerUser });
     console.log(formerUser);
